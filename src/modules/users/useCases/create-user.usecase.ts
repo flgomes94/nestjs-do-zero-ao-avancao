@@ -1,13 +1,9 @@
+import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/infra/database/prima.service';
+import { CreateUserDTO } from '../dto/user.dto';
 
-export type CreateUserDTO = {
-  username: string;
-  password: string;
-  email: string;
-  name: string;
-};
-
-export class createUserUseCase {
+@Injectable()
+export class CreateUserUseCase {
   constructor(private prisma: PrismaService) {}
   async execute(data: CreateUserDTO) {
     const user = await this.prisma.user.findFirst({
